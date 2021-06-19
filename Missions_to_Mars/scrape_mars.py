@@ -86,16 +86,16 @@ def scrape():
 
     for item in hemisphere_items:
         hemisphere_dict = {}
-        link = item.find('a', class_='itemLink')['href']
-        title = item.find('h3').text
-        browser.visit(url+link)
+        item_link = item.find('a', class_='itemLink')['href']
+        item_title = item.find('h3').text
+        browser.visit(url+item_link)
         html = browser.html
         soup = bs(html, 'html.parser')
-        downloads = soup.find('div', class_='downloads')
-        img = downloads.ul.li.find('a')['href']
-        hemisphere_dict["title"] = title
-        hemisphere_dict["img_url"] = urljoin(url,img)
-        hemisphere_images.append(hemisphere_dict)   
+        item_downloads = soup.find('div', class_='downloads')
+        item_img = item_downloads.ul.li.find('a')['href']
+        hemisphere_dict["title"] = item_title
+        hemisphere_dict["img_url"] = urljoin(url,item_img)
+        hemisphere_images.append(hemisphere_dict)
 
     # MARS DATA
 
